@@ -14,7 +14,7 @@ public class Controller_test {
 	@FXML
 	
 	private Circle tempCircle;
-	private TextField tempSearch;
+	//private TextField tempSearch;
 	
 	
 	public void onclick_search(MouseEvent e) {
