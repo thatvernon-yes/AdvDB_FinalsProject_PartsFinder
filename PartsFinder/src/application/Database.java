@@ -63,6 +63,56 @@ public class Database {
 	       
 	        return arr;
 	    }
+	    
+	    
+	  //takes an SQL query as an input and store it into a 2D array list 
+	    //shortcut for displaying the information of parts in the GUI
+	    public void getDisplayInfoQuery() throws ClassNotFoundException, SQLException {
+
+	    	String query = " SELECT `image`, `parts_name`, `parts_stock`, `parts_srp`, `retailer_ID`  FROM `parts` "; //query to give the necessary columns/information
+	    	
+	    	
+	        ArrayList<ArrayList<String>> arr = new ArrayList<ArrayList<String>>();
+	        
+	        Parts part = null;
+	        
+
+	        try{
+
+	            connectSQL();
+
+	            java.sql.Statement st = this.con.createStatement();
+
+	            ResultSet rs = ((java.sql.Statement) st).executeQuery(query);
+	            
+	            while(rs.next()) {
+	            	
+	            	System.out.println(rs.getString("parts_name"));
+	 	            System.out.println(rs.getInt("parts_stock"));
+	 	            System.out.println(rs.getInt("parts_srp"));
+	 	            System.out.println(rs.getString("retailer_ID"));
+	 	            System.out.println("\n");    
+	            	
+	            	part = new Parts(rs.getBlob(query), rs.getString("parts_name"), rs.getInt("parts_stock"), rs.getInt("parts_srp"), rs.getString("retailer_ID"));
+	           
+	   
+	            }
+	            
+	            
+	      
+
+	            rs.close();
+	            con.close();
+
+	        }catch(Exception e) {
+	            System.out.println(e);
+	        }
+
+	   
+	    }
+
+	    
+	    
 }
 	 
 	 

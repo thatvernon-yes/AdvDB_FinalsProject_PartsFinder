@@ -27,10 +27,14 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException  {
-		launch(args);
+		
 		
 		//for testing
 		Database DB = new Database();
-		DB.query("SELECT * FROM `parts` WHERE parts_ID = 1");
+		//DB.query("SELECT * FROM `parts` WHERE parts_ID = 1");
+		System.out.println("      ");
+		DB.getDisplayInfoQuery(); 
+		
+		//launch(args);
 	}
 }
