@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane prefHeight="439.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main_controller">
+   <children>
+      <Circle fx:id="tempCircle" fill="DODGERBLUE" layoutX="391.0" layoutY="46.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+      <TextField fx:id="tempSearch" layoutX="14.0" layoutY="30.0" prefHeight="32.0" prefWidth="354.0" promptText="In need of parts?" />
+      <TextField layoutX="424.0" layoutY="30.0" prefHeight="32.0" prefWidth="201.0" />
+      <Circle fill="DODGERBLUE" layoutX="648.0" layoutY="46.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+      <AnchorPane layoutX="14.0" layoutY="85.0" prefHeight="404.0" prefWidth="659.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+         <children>
+            <ScrollPane layoutX="13.0" layoutY="73.0" pannable="true" prefHeight="319.0" prefWidth="659.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <content>
+                  <GridPane fx:id="partsDisplay_mainContainer" prefHeight="0.0" prefWidth="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
