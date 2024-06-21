@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main_controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminSide_controller">
    <left>
       <VBox prefHeight="600.0" prefWidth="212.0" BorderPane.alignment="CENTER">
          <children>
@@ -34,25 +35,41 @@
                         <Image url="@../../../../ADV%20proj%20images/Sample_User_Icon.png" />
                      </image>
                   </ImageView>
-                  <Label text="username" />
+                  <Label text="Admin" />
                   <ChoiceBox fx:id="location_choiceBox" prefWidth="150.0" />
-                  <Button fx:id="partSearch_button" mnemonicParsing="false" onAction="#partsDisplayWithLocation" text="confirm location" />
+                  <Separator prefWidth="200.0" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="72.0" prefWidth="212.0">
                <children>
-                  <TextField alignment="TOP_CENTER" prefHeight="0.0" prefWidth="212.0" promptText="Search the part you need">
+                  <TextField fx:id="partsSearch_textField" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="212.0" promptText="Search the part you need">
                      <VBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" onAction="#partsDisplayWithLocation" text="Button" />
+                  <Button fx:id="partsSearch_button" mnemonicParsing="false" text="Search">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutX="10.0" layoutY="320.0" prefHeight="72.0" prefWidth="212.0">
+            <VBox alignment="CENTER" layoutX="10.0" layoutY="256.0" prefHeight="72.0" prefWidth="212.0">
                <children>
-                  <Label text="Sort" />
-                  <ChoiceBox fx:id="sort_button" prefWidth="150.0" />
+                  <Button fx:id="addParts_button" mnemonicParsing="false" text="Add  parts">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="10.0" layoutY="400.0" prefHeight="72.0" prefWidth="212.0">
+               <children>
+                  <Button fx:id="deleteParts_button" mnemonicParsing="false" text="Delete Parts">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
          </children>

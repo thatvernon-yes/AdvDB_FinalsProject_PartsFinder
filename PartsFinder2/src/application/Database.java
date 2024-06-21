@@ -78,16 +78,36 @@ public class Database {
     }
     
  
-    //kulang pa ng location
+ 
     public  ArrayList<Parts> createPartsClassesforDisplay() throws ClassNotFoundException, SQLException{
     	
     	ArrayList<Parts> partsArr = new ArrayList<Parts>();
-    	ResultSet rs = RSquery("SELECT `image`, `parts_name`, `parts_srp`, `parts_stock` FROM `parts`");
+    	ResultSet rs = RSquery("SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `location` FROM `parts`");
     	
     	 while (rs.next()) {
     		Parts part = new Parts();
 			part.setImage(rs.getBinaryStream("image"));
 			part.setName(rs.getString("parts_name"));
+			part.setLocation(rs.getString("location"));
+			part.setSrp(rs.getInt("parts_srp"));
+			part.setStock(rs.getInt("parts_stock"));
+			partsArr.add(part);
+         }
+    	
+		return partsArr;
+    	
+    }
+    
+    public  ArrayList<Parts> createPartsClassesforDisplay(String location) throws ClassNotFoundException, SQLException{
+    	
+    	ArrayList<Parts> partsArr = new ArrayList<Parts>();
+    	ResultSet rs = RSquery(" SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `location` FROM `parts` WHERE location =" + "\"" + location + "\"");
+    	
+    	 while (rs.next()) {
+    		Parts part = new Parts();
+			part.setImage(rs.getBinaryStream("image"));
+			part.setName(rs.getString("parts_name"));
+			part.setLocation(rs.getString("location"));
 			part.setSrp(rs.getInt("parts_srp"));
 			part.setStock(rs.getInt("parts_stock"));
 			partsArr.add(part);
