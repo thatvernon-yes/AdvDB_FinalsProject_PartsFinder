@@ -26,8 +26,12 @@ public class Main_controller implements Initializable {
     @FXML
     private TextField tempSearch;
     
+//    @FXML
+//    private GridPane partsDisplay_mainContainer;
+    
     @FXML
-    private GridPane partsDisplay_mainContainer;
+    private GridPane parts_gridPane;
+    
     ArrayList<Parts> partsDisplay;
     
 	
@@ -49,13 +53,13 @@ public class Main_controller implements Initializable {
 				partsContainer_controller partsContainer_controller = fxmlLoader.getController();
 				partsContainer_controller.setData(part);
 				
-				if(column == 6) {
+				if(column == 5) {
 					column = 0;
 					++row;
 				}
 				
-				partsDisplay_mainContainer.add(partsDisplay, column++, row);
-				GridPane.setMargin(partsDisplay_mainContainer, new Insets(10));
+				parts_gridPane.add(partsDisplay, column++, row);
+				GridPane.setMargin(parts_gridPane, new Insets(10));
 				
 			}
 		} catch (ClassNotFoundException e) {

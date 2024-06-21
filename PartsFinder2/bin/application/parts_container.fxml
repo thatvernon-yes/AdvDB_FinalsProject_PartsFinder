@@ -15,7 +15,7 @@
       <VBox prefHeight="93.0" prefWidth="226.0">
          <children>
             <Label fx:id="partsName" prefHeight="17.0" prefWidth="218.0" text="Name" />
-            <Label fx:id="partsLocation" prefHeight="17.0" prefWidth="220.0" text="Location" />
+            <Label fx:id="partsLocation" prefHeight="17.0" prefWidth="218.0" text="Location" />
             <Label fx:id="partsStock" prefHeight="17.0" prefWidth="227.0" text="stock" />
             <Label fx:id="partsSrp" prefHeight="17.0" prefWidth="226.0" text="srp" />
          </children>
