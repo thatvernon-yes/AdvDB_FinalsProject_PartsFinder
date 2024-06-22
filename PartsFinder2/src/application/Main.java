@@ -1,5 +1,7 @@
 package application;
 	
+
+
 import java.sql.SQLException;
 
 import javafx.application.Application;
@@ -27,9 +29,18 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException  {
-//		String column = "sample";
-//		String  search = "sample2";
-//		System.out.println(" SELECT * FROM `parts` WHERE "  + column  + " LIKE " +  "\"" + "%"  + search + "%" + "\"" );
+ 
+		
+//		String location = "sample";
+//		String partName = "sample";
+//		int upperPrice = 1;
+//		int lowerPrice = 1;
+//		
+//		//ResultSet rs = DB.RSquery(" SELECT * FROM `parts` WHERE location LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + "parts_srp" +  upperPrice + " BETWEEN " + lowerPrice  );
+//		System.out.println(" SELECT * FROM `parts` WHERE location LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + " AND parts_srp = " +  upperPrice + " BETWEEN " + lowerPrice  );
+	
+	//	System.out.println(" SELECT * FROM `parts` WHERE location LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + " AND parts_srp = " +  upperPrice + " BETWEEN " + lowerPrice   );
+		
 		launch(args);		 
 		
 	}

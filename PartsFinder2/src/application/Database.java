@@ -137,8 +137,25 @@ public class Database {
     	
     }
     
-    
-   
+    public  ArrayList<Parts> generalSearchSortedDisplay(String partName,String location, int upperPrice, int lowerPrice ) throws ClassNotFoundException, SQLException{
+    	
+    	ArrayList<Parts> partsArr = new ArrayList<Parts>();
+    	
+    	ResultSet rs = RSquery(" SELECT * FROM `parts` WHERE location LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + " AND parts_srp BETWEEN " +  lowerPrice + " AND " + upperPrice  );
+    	
+    	 while (rs.next()) {
+    		Parts part = new Parts();
+			part.setImage(rs.getBinaryStream("image"));
+			part.setName(rs.getString("parts_name"));
+			part.setLocation(rs.getString("location"));
+			part.setSrp(rs.getInt("parts_srp"));
+			part.setStock(rs.getInt("parts_stock"));
+			partsArr.add(part);
+         }
+    	
+		return partsArr;
+       
+    }
     
 }
 	 

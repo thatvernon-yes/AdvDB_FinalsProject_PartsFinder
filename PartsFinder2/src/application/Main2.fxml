@@ -93,6 +93,7 @@
             </VBox>
             <VBox alignment="CENTER" layoutX="10.0" layoutY="396.0" prefHeight="72.0" prefWidth="212.0">
                <children>
+                  <Button fx:id="generalSearch_button" mnemonicParsing="false" onAction="#generalSearch" text="GeneralSearch" />
                   <Button fx:id="gridDefault_button" mnemonicParsing="false" onAction="#restoreDefaultGrid" text="CLEAR">
                      <VBox.margin>
                         <Insets top="5.0" />

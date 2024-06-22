@@ -52,6 +52,10 @@ public class Main_controller implements Initializable {
 	    
 	    @FXML
 	    private ChoiceBox<Integer> lowerPriceLimit_choiceBox;
+	    
+	    @FXML
+	    private Button generalSearch_button;
+
 
 
    
@@ -131,8 +135,14 @@ public class Main_controller implements Initializable {
 		
 //-----FOR LISTING THE PRICES IN THE CHOICE BOX--------------------
 
+		ArrayList <Integer> prices = new ArrayList <Integer>();
 		
+		for(int i = 0; i <=10000; i+=100) {
+			prices.add(i);
+		}
 		
+		upperPriceLimit_choiceBox.getItems().addAll(prices);
+		lowerPriceLimit_choiceBox.getItems().addAll(prices);
 		
 		
 	}
@@ -229,6 +239,13 @@ public class Main_controller implements Initializable {
 	public void restoreDefaultGrid (ActionEvent restore) {
 		
 		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
+		partsSearch_textField.clear();
+		location_choiceBox.getItems().clear();
+		upperPriceLimit_choiceBox.getItems().clear();
+		lowerPriceLimit_choiceBox.getItems().clear();
+		
+		
+		
 		Database DB = new Database();
 		
 		//-----FOR DISPLAYING THE ITEMS FROM THE DATABASE -----------------------
@@ -269,4 +286,53 @@ public class Main_controller implements Initializable {
 		
 	}
 	
+	public void generalSearch(ActionEvent genSearch) throws ClassNotFoundException, SQLException  {
+		
+		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
+		
+		Database DB = new Database();
+		
+		String partName = partsSearch_textField.getText();
+		String location = location_choiceBox.getValue();
+		int upperPrice = upperPriceLimit_choiceBox.getValue();
+		int lowerPrice = lowerPriceLimit_choiceBox.getValue();
+		
+		
+		try {
+			
+			partsDisplay =  DB.generalSearchSortedDisplay(partName, location, upperPrice, lowerPrice);
+			int column = 0;
+			int row = 1;
+	
+			for(Parts part : partsDisplay) {
+				
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+				VBox partsDisplay = fxmlLoader.load();
+				partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+				partsContainer_controller.setData(part);
+				
+				if(column == 3) {
+					column = 0;
+					++row;
+				}
+				
+				parts_gridPane.add(partsDisplay, column++, row);
+				GridPane.setMargin(parts_gridPane, new Insets(10));
+				
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+
+
 }
