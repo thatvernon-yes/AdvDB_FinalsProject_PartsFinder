@@ -98,10 +98,10 @@ public class Database {
     	
     }
     
-    public  ArrayList<Parts> createPartsClassesforDisplay(String location) throws ClassNotFoundException, SQLException{
+    public  ArrayList<Parts> createPartsClassesforDisplay(String choice) throws ClassNotFoundException, SQLException{
     	
     	ArrayList<Parts> partsArr = new ArrayList<Parts>();
-    	ResultSet rs = RSquery(" SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `location` FROM `parts` WHERE location =" + "\"" + location + "\"");
+    	ResultSet rs = RSquery(" SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `location` FROM `parts` WHERE location =" + "\"" + choice + "\"");
     	
     	 while (rs.next()) {
     		Parts part = new Parts();
@@ -116,6 +116,28 @@ public class Database {
 		return partsArr;
     	
     }
+    
+    //P E N D I N G
+    public  ArrayList<Parts> partsForSortedDisplay(String column, String search) throws ClassNotFoundException, SQLException{
+    	
+    	ArrayList<Parts> partsArr = new ArrayList<Parts>();
+    	ResultSet rs = RSquery(" SELECT * FROM `parts` WHERE "  + column  + " LIKE " +  "\"" + "%"  + search + "%" + "\"" );
+    	
+    	 while (rs.next()) {
+    		Parts part = new Parts();
+			part.setImage(rs.getBinaryStream("image"));
+			part.setName(rs.getString("parts_name"));
+			part.setLocation(rs.getString("location"));
+			part.setSrp(rs.getInt("parts_srp"));
+			part.setStock(rs.getInt("parts_stock"));
+			partsArr.add(part);
+         }
+    	
+		return partsArr;
+    	
+    }
+    
+    
    
     
 }

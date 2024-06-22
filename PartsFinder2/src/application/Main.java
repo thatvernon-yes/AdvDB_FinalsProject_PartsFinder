@@ -27,7 +27,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException  {
-		
+//		String column = "sample";
+//		String  search = "sample2";
+//		System.out.println(" SELECT * FROM `parts` WHERE "  + column  + " LIKE " +  "\"" + "%"  + search + "%" + "\"" );
 		launch(args);		 
 		
 	}
