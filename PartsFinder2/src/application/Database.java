@@ -2,7 +2,8 @@ package application;
 
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
+
 
 
 public class Database {
@@ -23,8 +24,7 @@ public class Database {
 	      this.con = DriverManager.getConnection(url, username, password);
 	 
 	 }
-	 
-	 
+	  
 	 public ResultSet RSquery(String query) throws ClassNotFoundException, SQLException {
 		 
 		 connectSQL();
@@ -77,8 +77,6 @@ public class Database {
         return arr;
     }
     
- 
- 
     public  ArrayList<Parts> createPartsClassesforDisplay() throws ClassNotFoundException, SQLException{
     	
     	ArrayList<Parts> partsArr = new ArrayList<Parts>();
@@ -156,6 +154,113 @@ public class Database {
 		return partsArr;
        
     }
+    
+    //WILL BE USED FOR A CHOICE BOX SORT LIST
+    //PENDING
+    public  ArrayList<Parts> SortedDisplay(String choice, GraphRepresentation graph, String location) throws ClassNotFoundException, SQLException{
+    	
+    	ArrayList<Parts> partsArr = new ArrayList<Parts>();
+    	ResultSet rs;
+    	
+    	switch(choice) {
+    	
+    	case("Name"):
+    		
+    		 rs = RSquery(" SELECT * FROM `parts` ORDER BY `parts_name` ASC ");
+    	
+		   	 while (rs.next()) {
+		   		Parts part = new Parts();
+					part.setImage(rs.getBinaryStream("image"));
+					part.setName(rs.getString("parts_name"));
+					part.setLocation(rs.getString("location"));
+					part.setSrp(rs.getInt("parts_srp"));
+					part.setStock(rs.getInt("parts_stock"));
+					partsArr.add(part);
+		        }
+		   	
+				break;
+    	
+    	case("Location"):	
+    		
+    		ArrayList <String> locations = new ArrayList<String>();
+    		ArrayList <Integer> distance = new ArrayList<Integer>();
+
+    		
+    		List<Map.Entry<String, Integer>> sortedVertices = graph.getSortedVerticesWithDistances(location);
+	        for (Map.Entry<String, Integer> entry : sortedVertices) {
+	        	locations.add(entry.getKey());
+	        	distance.add(entry.getValue());
+	            //System.out.println("Vertex: " + entry.getKey() + ", Distance: " + entry.getValue());
+	        }
+    		
+    		rs = RSquery("SELECT * FROM parts ORDER BY FIELD (location, " +  "\"" + locations.get(0) + "\"" + ", " +  "\"" + locations.get(1) + "\"" + ", "+  "\"" + locations.get(2) + "\"" + ")");
+//    		rs = RSquery("SELECT * FROM parts ORDER BY FIELD (location, " +  "\"" + locations.get(0) + "\"" + ", " +  "\"" + locations.get(1) + "\"" + ", "+  "\"" + locations.get(2) + "\"" +", " +  "\"" + locations.get(3) + "\"" + ", " +  "\"" + locations.get(4) + "\"" + ", " +  "\"" + locations.get(5) + "\"" + ", " +  "\"" + locations.get(6) + "\"");
+    		  
+	   	 	while (rs.next()) {
+		   		Parts part = new Parts();
+					part.setImage(rs.getBinaryStream("image"));
+					part.setName(rs.getString("parts_name"));
+					part.setLocation(rs.getString("location"));
+					part.setSrp(rs.getInt("parts_srp"));
+					part.setStock(rs.getInt("parts_stock"));
+					partsArr.add(part);
+	   	 		}
+		   	
+	   	 		break;
+			
+			
+    	case("Price"):	
+    		 
+    		rs = RSquery(" SELECT * FROM `parts` ORDER BY `parts_srp` ASC ");
+    	
+	   	 	while (rs.next()) {
+		   		Parts part = new Parts();
+					part.setImage(rs.getBinaryStream("image"));
+					part.setName(rs.getString("parts_name"));
+					part.setLocation(rs.getString("location"));
+					part.setSrp(rs.getInt("parts_srp"));
+					part.setStock(rs.getInt("parts_stock"));
+					partsArr.add(part);
+	   	 		}
+		   	
+	   	 		break;
+    	}
+    	
+		return partsArr;
+    	
+    }
+    
+    
+//    public  ArrayList<Parts> TEST( ) throws ClassNotFoundException, SQLException{
+//    	
+//    	ArrayList<Parts> partsArr = new ArrayList<Parts>();
+//    	
+//    	ResultSet rs = RSquery(" SELECT * FROM `parts` ORDER BY `parts_name` ASC ");
+//    	
+//    	 while (rs.next()) {
+//    		Parts part = new Parts();
+//			part.setImage(rs.getBinaryStream("image"));
+//			part.setName(rs.getString("parts_name"));
+//			part.setLocation(rs.getString("location"));
+//			part.setSrp(rs.getInt("parts_srp"));
+//			part.setStock(rs.getInt("parts_stock"));
+//			partsArr.add(part);
+//         }
+//    	
+//		return partsArr;
+//       
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
 	 

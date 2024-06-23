@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -89,6 +90,25 @@
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Separator>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="33.0" prefWidth="212.0">
+               <children>
+                  <HBox prefHeight="23.0" prefWidth="212.0">
+                     <children>
+                        <ChoiceBox fx:id="sort_choiceBox" prefHeight="37.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </ChoiceBox>
+                        <Button fx:id="sortConfirm_button" mnemonicParsing="false" onAction="#sort" text="Sort">
+                           <HBox.margin>
+                              <Insets bottom="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutX="10.0" layoutY="396.0" prefHeight="72.0" prefWidth="212.0">

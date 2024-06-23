@@ -30,18 +30,12 @@ public class Main extends Application {
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException  {
  
-		
-//		String location = "sample";
-//		String partName = "sample";
-//		int upperPrice = 1;
-//		int lowerPrice = 1;
-//		
-//		//ResultSet rs = DB.RSquery(" SELECT * FROM `parts` WHERE location LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + "parts_srp" +  upperPrice + " BETWEEN " + lowerPrice  );
-//		System.out.println(" SELECT * FROM `parts` WHERE location LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + " AND parts_srp = " +  upperPrice + " BETWEEN " + lowerPrice  );
-	
-	//	System.out.println(" SELECT * FROM `parts` WHERE location LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + " AND parts_srp = " +  upperPrice + " BETWEEN " + lowerPrice   );
-		
-		launch(args);		 
+//String sample = "sample";
+
+//	System.out.println(" SELECT * FROM `parts` WHERE location LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + " AND parts_srp = " +  upperPrice + " BETWEEN " + lowerPrice   );
+//String test = "SELECT * FROM parts ORDER BY FIELD (location, " +  "\"" + sample + "\"" + ", " +  "\"" + sample + "\"" + ", "+  "\"" + sample + "\"" +", " +  "\"" + sample + "\"" + ", " +  "\"" + sample + "\"" + ", " +  "\"" + sample + "\"" + ", " +  "\"" + sample + "\"" + ")";
+//System.out.println(test);	
+	launch(args);		 
 		
 	}
 }

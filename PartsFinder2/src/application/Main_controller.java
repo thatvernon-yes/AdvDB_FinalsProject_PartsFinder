@@ -55,17 +55,23 @@ public class Main_controller implements Initializable {
 	    
 	    @FXML
 	    private Button generalSearch_button;
+	    
+	    @FXML
+	    private ChoiceBox<String> sort_choiceBox;
+	    
+	    @FXML
+	    private Button sortConfirm_button;
+	   
 
-
-
-   
 	    ArrayList<Parts> partsDisplay;
-    
+	    
+	    GraphRepresentation graph = new GraphRepresentation();
+	    
+	    Database DB = new Database();
+	   
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		Database DB = new Database();
 		
 //-----FOR DISPLAYING THE ITEMS FROM THE DATABASE -----------------------
 		try {
@@ -101,7 +107,6 @@ public class Main_controller implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//-----END OF "FOR DISPLAYING THE ITEMS FROM THE DATABASE"--------------------	
 		
 
 //-----FOR LISTING THE AVAILABLE LOCATION IN THE CHOICE BOX--------------------
@@ -130,7 +135,6 @@ public class Main_controller implements Initializable {
 		
 		location_choiceBox.getItems().addAll(locations);
 
-//-----END OF "FOR LISTING THE AVAILABLE LOCATION IN THE CHOICE BOX"--------------------	
 
 		
 //-----FOR LISTING THE PRICES IN THE CHOICE BOX--------------------
@@ -144,15 +148,25 @@ public class Main_controller implements Initializable {
 		upperPriceLimit_choiceBox.getItems().addAll(prices);
 		lowerPriceLimit_choiceBox.getItems().addAll(prices);
 		
+//-----FOR GRAPH REPRESENTATION OF A MAP--------------------		
 		
-	}
+		
+        
+//-----FOR LISTING THE PRICES IN THE CHOICE BOX--------------------    
+        ArrayList <String> sortChoices = new ArrayList<String>();
+        sortChoices.add("Name");
+        sortChoices.add("Price");
+        sortChoices.add("Location");
+      	
+        sort_choiceBox.getItems().addAll(sortChoices);
+       
+}
 	
 	
 	public void partsDisplayWithLocation (ActionEvent confirmLocation) {
 		
 		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
-		
-		Database DB = new Database();
+
 		String location = location_choiceBox.getValue();
 		ArrayList<Parts> partsLocationDisplay = null;
 		
@@ -195,8 +209,6 @@ public class Main_controller implements Initializable {
 	public void partsDisplaySortedName (ActionEvent confirmPartName) {
 		
 		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
-		
-		Database DB = new Database();
 		String partName = partsSearch_textField.getText();
 		ArrayList<Parts> partsSortDisplay = null;
 		
@@ -240,13 +252,11 @@ public class Main_controller implements Initializable {
 		
 		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
 		partsSearch_textField.clear();
-		location_choiceBox.getItems().clear();
-		upperPriceLimit_choiceBox.getItems().clear();
-		lowerPriceLimit_choiceBox.getItems().clear();
+		location_choiceBox.setValue(null);
+		upperPriceLimit_choiceBox.setValue(null); 
+		lowerPriceLimit_choiceBox.setValue(null);
+		sort_choiceBox.setValue(null);
 		
-		
-		
-		Database DB = new Database();
 		
 		//-----FOR DISPLAYING THE ITEMS FROM THE DATABASE -----------------------
 				try {
@@ -290,13 +300,10 @@ public class Main_controller implements Initializable {
 		
 		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
 		
-		Database DB = new Database();
-		
 		String partName = partsSearch_textField.getText();
 		String location = location_choiceBox.getValue();
 		int upperPrice = upperPriceLimit_choiceBox.getValue();
 		int lowerPrice = lowerPriceLimit_choiceBox.getValue();
-		
 		
 		try {
 			
@@ -334,5 +341,122 @@ public class Main_controller implements Initializable {
 	
 	}
 
+	public void sort(ActionEvent sort) throws ClassNotFoundException, SQLException {
 
+		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
+		
+		// ADDING CITIES TO THE GRAPH
+        graph.addEdge("City A", "City B", 4);
+        graph.addEdge("City A", "City C", 45);
+        graph.addEdge("City A", "City D", 12);
+        graph.addEdge("City A", "City E", 15);
+        graph.addEdge("City A", "City F", 40);
+        graph.addEdge("City A", "City G", 21);
+        
+        graph.addEdge("City B", "City C", 51);
+        graph.addEdge("City B", "City D", 24);
+        graph.addEdge("City B", "City E", 56);
+        graph.addEdge("City B", "City F", 22);
+        graph.addEdge("City B", "City G", 51);
+        
+     
+        graph.addEdge("City C", "City D", 834);
+        graph.addEdge("City C", "City E", 130);
+        graph.addEdge("City C", "City F", 83);
+        graph.addEdge("City C", "City G", 130);
+       
+          
+        graph.addEdge("City D", "City E", 32);
+        graph.addEdge("City D", "City F", 124);
+        graph.addEdge("City D", "City G", 23);
+        
+        graph.addEdge("City F", "City E", 72);
+        graph.addEdge("City F", "City G", 21);
+        
+        graph.addEdge("City E", "City G", 42);
+		
+		
+		ArrayList<Parts> partsSortDisplay = null;
+		String location = location_choiceBox.getValue();
+		String choice = sort_choiceBox.getValue();
+		
+		try {
+			
+			partsSortDisplay = DB.SortedDisplay(choice, graph, location);
+			int column = 0;
+			int row = 1;
+			
+			for(Parts part : partsSortDisplay) {
+				
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+				VBox partsDisplay = fxmlLoader.load();
+				partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+				partsContainer_controller.setData(part);
+				
+				if(column == 3) {
+					column = 0;
+					++row;
+				}
+				
+				parts_gridPane.add(partsDisplay, column++, row);
+				GridPane.setMargin(parts_gridPane, new Insets(10));
+				
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	
+//	public void test (ActionEvent confirmPartName) {
+//		
+//		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
+//		ArrayList<Parts> partsSortDisplay = null;
+//		
+//		try {
+//			
+//			partsSortDisplay = DB.TEST();
+//			int column = 0;
+//			int row = 1;
+//			
+//			for(Parts part : partsSortDisplay) {
+//				
+//				FXMLLoader fxmlLoader = new FXMLLoader();
+//				fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+//				VBox partsDisplay = fxmlLoader.load();
+//				partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+//				partsContainer_controller.setData(part);
+//				
+//				if(column == 3) {
+//					column = 0;
+//					++row;
+//				}
+//				
+//				parts_gridPane.add(partsDisplay, column++, row);
+//				GridPane.setMargin(parts_gridPane, new Insets(10));
+//				
+//			}
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
+	
+	
 }
