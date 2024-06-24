@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
+         <left>
+            <VBox prefHeight="600.0" prefWidth="212.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="51.0" prefWidth="258.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="40.0" prefWidth="258.0" text="PARTS FINDER" textFill="#cd0000">
+                           <font>
+                              <Font name="Gill Sans MT Condensed" size="38.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="164.0" prefWidth="212.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../ADV%20proj%20images/Sample_User_Icon.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Admin" />
+                        <ChoiceBox fx:id="location_choiceBox" prefWidth="150.0" />
+                        <Separator prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="72.0" prefWidth="212.0">
+                     <children>
+                        <TextField fx:id="partsSearch_textField" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="212.0" promptText="Search the part you need">
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button fx:id="partsSearch_button" mnemonicParsing="false" text="Search">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="10.0" layoutY="256.0" prefHeight="72.0" prefWidth="212.0">
+                     <children>
+                        <Button fx:id="addParts_button" mnemonicParsing="false" text="Add  parts">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="10.0" layoutY="400.0" prefHeight="72.0" prefWidth="212.0">
+                     <children>
+                        <Button fx:id="deleteParts_button" mnemonicParsing="false" text="Delete Parts">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <ScrollPane prefHeight="336.0" prefWidth="405.0" BorderPane.alignment="CENTER">
+               <content>
+                  <GridPane fx:id="parts_gridPane" prefHeight="0.0" prefWidth="3.0">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
