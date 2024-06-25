@@ -30,6 +30,7 @@ public class adminLoginController implements Initializable {
     private PreparedStatement pst;
     private ResultSet rs;
     private Stage stage;
+    private Parent root;
 
 
 
@@ -94,12 +95,30 @@ public class adminLoginController implements Initializable {
     }
 
     private void loadAdminView(ActionEvent event) throws IOException{
+
+        String username = txtUname.getText();
+        
+
+        
+//        System.out.println(username + location);
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminSide.fxml"));
+        root = loader.load();
+        
+        AdminSide_controller mc = loader.getController();
+        
+    	
+    	mc.setUsernameandLocation(username);
+    	
+        
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("adminSide.fxml"));
+//			Parent root = FXMLLoader.load(getClass().getResource("Main2.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
 			stage.setScene(new Scene(root));
 			stage.show();
+			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

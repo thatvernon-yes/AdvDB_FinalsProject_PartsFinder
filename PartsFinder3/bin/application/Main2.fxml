@@ -31,7 +31,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="164.0" prefWidth="212.0">
                <children>
-                  <ImageView fitHeight="104.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="userImage" fitHeight="104.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../ADV%20proj%20images/Sample_User_Icon.png" />
                      </image>

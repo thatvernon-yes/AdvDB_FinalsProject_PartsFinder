@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -68,6 +69,9 @@ public class Main_controller implements Initializable {
 	   
 	    @FXML
 	    private Label username_label;
+	    
+	    @FXML
+	    private ImageView userImage;
 
 	    ArrayList<Parts> partsDisplay;
 	    
@@ -485,11 +489,7 @@ public class Main_controller implements Initializable {
 	public void generalSearch(ActionEvent genSearch) throws ClassNotFoundException, SQLException  {
 		
 
-		if (partsSearch_textField.getText() == null && location_choiceBox.getValue() == null && upperPriceLimit_choiceBox.getValue().equals(null) && lowerPriceLimit_choiceBox.getValue().equals(null)) {
-			JOptionPane.showMessageDialog(null, "Part Name, Location, Upper and Lower Price fields must have 1 entry");
-	
-		}
-		else {
+		if (partsSearch_textField.getText() != null && location_choiceBox.getValue() != null && upperPriceLimit_choiceBox.getValue() != null && lowerPriceLimit_choiceBox.getValue() != null) {
 			try {
 				
 				parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
@@ -531,6 +531,10 @@ public class Main_controller implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+			
+			else {
+				JOptionPane.showMessageDialog(null, "Please enter all the search fields");
 		}
 	
 	}
