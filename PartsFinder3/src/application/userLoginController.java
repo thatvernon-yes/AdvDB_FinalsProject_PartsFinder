@@ -61,17 +61,27 @@ public class userLoginController implements Initializable {
     private ChoiceBox<String> userLocation_choiceBox;
 
     @FXML
-    void login(ActionEvent event) throws IOException {
+    void login(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    	
         String username = txtUname.getText();
         String password = txtPass.getText();
+//        
+
 
         if (username.equals("") && password.equals("")) {
             JOptionPane.showMessageDialog(null, "Username or Password Blank");
         } else {
             try {
                 connectSQL();
+                
+//                String location = userLocation_choiceBox.getValue().toString();
 
                 pst = con.prepareStatement("SELECT * FROM customer WHERE customer_username=? AND customer_password=?");
+                
+//                String update = ("UPDATE customer SET location = "+"\"" + location + "\" WHERE customer_username = "+"\"" + username + "\"");
+                
+                
+                
 
                 pst.setString(1, username);
                 pst.setString(2, password);
@@ -84,7 +94,11 @@ public class userLoginController implements Initializable {
                     Stage stage = (Stage) btnLogin.getScene().getWindow();
                     stage.close();
                     
+//                    System.out.println(rs);
+                    
                     loadMainView(event);
+                    
+                    
                                         
                 } else {
                     JOptionPane.showMessageDialog(null, "Login Failed");
@@ -99,16 +113,17 @@ public class userLoginController implements Initializable {
         }
     }
 
-    private void loadMainView(ActionEvent event) throws IOException{
+    private void loadMainView(ActionEvent event) throws IOException, ClassNotFoundException, SQLException{
     	
 
+    	connectSQL();
 
-    	
-    	
         String username = txtUname.getText();
         String location = userLocation_choiceBox.getValue().toString();
         
-        System.out.println(username + location);
+
+        
+//        System.out.println(username + location);
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Main2.fxml"));
         root = loader.load();
@@ -141,11 +156,11 @@ public class userLoginController implements Initializable {
     			
     			//needs to location update for the database P E N D I N G
     			try {
-    				rs = DB.RSquery("SELECT location FROM `parts`");
+    				rs = DB.RSquery("SELECT address FROM `parts`");
     				while(rs.next()) {
     					
-    					if(!locations.contains(rs.getString("location"))) {
-    						locations.add(rs.getString("location"));
+    					if(!locations.contains(rs.getString("address"))) {
+    						locations.add(rs.getString("address"));
     					
     					}
     					

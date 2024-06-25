@@ -122,11 +122,11 @@ public class Main_controller implements Initializable {
 		
 		//needs to location update for the database P E N D I N G
 		try {
-			rs = DB.RSquery("SELECT location FROM `parts`");
+			rs = DB.RSquery("SELECT address FROM `parts`");
 			while(rs.next()) {
 				
-				if(!locations.contains(rs.getString("location"))) {
-					locations.add(rs.getString("location"));
+				if(!locations.contains(rs.getString("address"))) {
+					locations.add(rs.getString("address"));
 				
 				}
 				
@@ -306,10 +306,10 @@ public class Main_controller implements Initializable {
 		
 		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
 		partsSearch_textField.clear();
-		location_choiceBox.setValue(null);
-		upperPriceLimit_choiceBox.setValue(null); 
-		lowerPriceLimit_choiceBox.setValue(null);
-		sort_choiceBox.setValue(null);
+		location_choiceBox.getSelectionModel().clearSelection();
+		upperPriceLimit_choiceBox.getSelectionModel().clearSelection(); 
+		lowerPriceLimit_choiceBox.getSelectionModel().clearSelection();
+		sort_choiceBox.getSelectionModel().clearSelection();
 		
 		
 		//-----FOR DISPLAYING THE ITEMS FROM THE DATABASE -----------------------
@@ -484,45 +484,53 @@ public class Main_controller implements Initializable {
 	
 	public void generalSearch(ActionEvent genSearch) throws ClassNotFoundException, SQLException  {
 		
-		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
-		
-		String partName = partsSearch_textField.getText();
-		String location = location_choiceBox.getValue();
-		int upperPrice = upperPriceLimit_choiceBox.getValue();
-		int lowerPrice = lowerPriceLimit_choiceBox.getValue();
-		
-		try {
-			
-			partsDisplay =  DB.generalSearchSortedDisplay(partName, location, upperPrice, lowerPrice);
-			int column = 0;
-			int row = 1;
+
+		if (partsSearch_textField.getText() == null && location_choiceBox.getValue() == null && upperPriceLimit_choiceBox.getValue().equals(null) && lowerPriceLimit_choiceBox.getValue().equals(null)) {
+			JOptionPane.showMessageDialog(null, "Part Name, Location, Upper and Lower Price fields must have 1 entry");
 	
-			for(Parts part : partsDisplay) {
+		}
+		else {
+			try {
 				
-				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
-				VBox partsDisplay = fxmlLoader.load();
-				partsContainer_controller partsContainer_controller = fxmlLoader.getController();
-				partsContainer_controller.setData(part);
+				parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
+
+				String partName = partsSearch_textField.getText();
+				String location = location_choiceBox.getValue();
+				int upperPrice = upperPriceLimit_choiceBox.getValue();
+				int lowerPrice = lowerPriceLimit_choiceBox.getValue();
 				
-				if(column == 3) {
-					column = 0;
-					++row;
+				
+				partsDisplay =  DB.generalSearchSortedDisplay(partName, location, upperPrice, lowerPrice);
+				int column = 0;
+				int row = 1;
+		
+				for(Parts part : partsDisplay) {
+					
+					FXMLLoader fxmlLoader = new FXMLLoader();
+					fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+					VBox partsDisplay = fxmlLoader.load();
+					partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+					partsContainer_controller.setData(part);
+					
+					if(column == 3) {
+						column = 0;
+						++row;
+					}
+					
+					parts_gridPane.add(partsDisplay, column++, row);
+					GridPane.setMargin(parts_gridPane, new Insets(10));
+					
 				}
-				
-				parts_gridPane.add(partsDisplay, column++, row);
-				GridPane.setMargin(parts_gridPane, new Insets(10));
-				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	
 	}

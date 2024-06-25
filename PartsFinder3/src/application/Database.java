@@ -80,13 +80,13 @@ public class Database {
     public  ArrayList<Parts> createPartsClassesforDisplay() throws ClassNotFoundException, SQLException{
     	
     	ArrayList<Parts> partsArr = new ArrayList<Parts>();
-    	ResultSet rs = RSquery("SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `location` FROM `parts`");
+    	ResultSet rs = RSquery("SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `address` FROM `parts`");
     	
     	 while (rs.next()) {
     		Parts part = new Parts();
 			part.setImage(rs.getBinaryStream("image"));
 			part.setName(rs.getString("parts_name"));
-			part.setLocation(rs.getString("location"));
+			part.setLocation(rs.getString("address"));
 			part.setSrp(rs.getInt("parts_srp"));
 			part.setStock(rs.getInt("parts_stock"));
 			partsArr.add(part);
@@ -99,13 +99,13 @@ public class Database {
     public  ArrayList<Parts> createPartsClassesforDisplay(String choice) throws ClassNotFoundException, SQLException{
     	
     	ArrayList<Parts> partsArr = new ArrayList<Parts>();
-    	ResultSet rs = RSquery(" SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `location` FROM `parts` WHERE location =" + "\"" + choice + "\"");
+    	ResultSet rs = RSquery(" SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `address` FROM `parts` WHERE address =" + "\"" + choice + "\"");
     	
     	 while (rs.next()) {
     		Parts part = new Parts();
 			part.setImage(rs.getBinaryStream("image"));
 			part.setName(rs.getString("parts_name"));
-			part.setLocation(rs.getString("location"));
+			part.setLocation(rs.getString("address"));
 			part.setSrp(rs.getInt("parts_srp"));
 			part.setStock(rs.getInt("parts_stock"));
 			partsArr.add(part);
@@ -125,7 +125,7 @@ public class Database {
     		Parts part = new Parts();
 			part.setImage(rs.getBinaryStream("image"));
 			part.setName(rs.getString("parts_name"));
-			part.setLocation(rs.getString("location"));
+			part.setLocation(rs.getString("address"));
 			part.setSrp(rs.getInt("parts_srp"));
 			part.setStock(rs.getInt("parts_stock"));
 			partsArr.add(part);
@@ -139,13 +139,13 @@ public class Database {
     	
     	ArrayList<Parts> partsArr = new ArrayList<Parts>();
     	
-    	ResultSet rs = RSquery(" SELECT * FROM `parts` WHERE location LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + " AND parts_srp BETWEEN " +  lowerPrice + " AND " + upperPrice  );
+    	ResultSet rs = RSquery(" SELECT * FROM `parts` WHERE address LIKE " +  "\"" + "%"  + location + "%" + "\"" + " AND parts_name LIKE " + "\"" + "%"  + partName + "%" + "\"" + " AND parts_srp BETWEEN " +  lowerPrice + " AND " + upperPrice  );
     	
     	 while (rs.next()) {
     		Parts part = new Parts();
 			part.setImage(rs.getBinaryStream("image"));
 			part.setName(rs.getString("parts_name"));
-			part.setLocation(rs.getString("location"));
+			part.setLocation(rs.getString("address"));
 			part.setSrp(rs.getInt("parts_srp"));
 			part.setStock(rs.getInt("parts_stock"));
 			partsArr.add(part);
@@ -166,7 +166,7 @@ public class Database {
        Parts part = new Parts();
     part.setImage(rs.getBinaryStream("image"));
     part.setName(rs.getString("parts_name"));
-    part.setLocation(rs.getString("location"));
+    part.setLocation(rs.getString("address"));
     part.setSrp(rs.getInt("parts_srp"));
     part.setStock(rs.getInt("parts_stock"));
     partsArr.add(part);
@@ -186,7 +186,7 @@ public class Database {
                Parts part = new Parts();
                 part.setImage(rs.getBinaryStream("image"));
                 part.setName(rs.getString("parts_name"));
-                part.setLocation(rs.getString("location"));
+                part.setLocation(rs.getString("address"));
                 part.setSrp(rs.getInt("parts_srp"));
                 part.setStock(rs.getInt("parts_stock"));
                 partsArr.add(part);
@@ -206,7 +206,7 @@ public class Database {
                Parts part = new Parts();
                 part.setImage(rs.getBinaryStream("image"));
                 part.setName(rs.getString("parts_name"));
-                part.setLocation(rs.getString("location"));
+                part.setLocation(rs.getString("address"));
                 part.setSrp(rs.getInt("parts_srp"));
                 part.setStock(rs.getInt("parts_stock"));
                 partsArr.add(part);
@@ -232,7 +232,7 @@ public class Database {
 		   		Parts part = new Parts();
 					part.setImage(rs.getBinaryStream("image"));
 					part.setName(rs.getString("parts_name"));
-					part.setLocation(rs.getString("location"));
+					part.setLocation(rs.getString("address"));
 					part.setSrp(rs.getInt("parts_srp"));
 					part.setStock(rs.getInt("parts_stock"));
 					partsArr.add(part);
@@ -240,7 +240,7 @@ public class Database {
 		   	
 				break;
     	
-    	case("Location"):	
+    	case("address"):	
     		
     		ArrayList <String> locations = new ArrayList<String>();
     		ArrayList <Integer> distance = new ArrayList<Integer>();
@@ -253,14 +253,14 @@ public class Database {
 	            //System.out.println("Vertex: " + entry.getKey() + ", Distance: " + entry.getValue());
 	        }
     		
-    		rs = RSquery("SELECT * FROM parts ORDER BY FIELD (location, " +  "\"" + locations.get(0) + "\"" + ", " +  "\"" + locations.get(1) + "\"" + ", "+  "\"" + locations.get(2) + "\"" + ")");
+    		rs = RSquery("SELECT * FROM parts ORDER BY FIELD (address, " +  "\"" + locations.get(0) + "\"" + ", " +  "\"" + locations.get(1) + "\"" + ", "+  "\"" + locations.get(2) + "\"" + ")");
 //    		rs = RSquery("SELECT * FROM parts ORDER BY FIELD (location, " +  "\"" + locations.get(0) + "\"" + ", " +  "\"" + locations.get(1) + "\"" + ", "+  "\"" + locations.get(2) + "\"" +", " +  "\"" + locations.get(3) + "\"" + ", " +  "\"" + locations.get(4) + "\"" + ", " +  "\"" + locations.get(5) + "\"" + ", " +  "\"" + locations.get(6) + "\"");
     		  
 	   	 	while (rs.next()) {
 		   		Parts part = new Parts();
 					part.setImage(rs.getBinaryStream("image"));
 					part.setName(rs.getString("parts_name"));
-					part.setLocation(rs.getString("location"));
+					part.setLocation(rs.getString("address"));
 					part.setSrp(rs.getInt("parts_srp"));
 					part.setStock(rs.getInt("parts_stock"));
 					partsArr.add(part);
@@ -277,7 +277,7 @@ public class Database {
 		   		Parts part = new Parts();
 					part.setImage(rs.getBinaryStream("image"));
 					part.setName(rs.getString("parts_name"));
-					part.setLocation(rs.getString("location"));
+					part.setLocation(rs.getString("address"));
 					part.setSrp(rs.getInt("parts_srp"));
 					part.setStock(rs.getInt("parts_stock"));
 					partsArr.add(part);
