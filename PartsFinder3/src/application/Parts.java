@@ -12,10 +12,13 @@ public class Parts {
 	private int stock;
 	private String location;
 	private int id;
+	private String store;
 
 
 
-	public Parts( InputStream image, String name, int stock, int srp, String location) {
+
+
+	public Parts( InputStream image, String name, int stock, int srp, String location, String store) {
 		
 		//information na naka display
 		this.image = image;
@@ -23,8 +26,17 @@ public class Parts {
 		this.srp = srp;
 		this.stock = stock;
 		this.location = location;
+		this.store = store;
 	}
 
+	public String getStore() {
+		return store;
+	}
+
+	public void setStore(String store) {
+		this.store = store;
+	}
+	
 	public int getId() {
 		return id;
 	}

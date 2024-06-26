@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-public class partsContainer_controller {
+public class partsContainer_controllerAdmin {
 	
     private Connection con;
 
@@ -51,10 +51,8 @@ public class partsContainer_controller {
 	    private Label partsStock;
 	    
 	    @FXML
-	    private Label partsStoreName;
-	    
-	    @FXML
 	    void deletePart(MouseEvent event) throws ClassNotFoundException, SQLException {
+	    	deletePart();
 	    }
     
     public void setData (Parts part) throws IOException {
@@ -65,19 +63,40 @@ public class partsContainer_controller {
     	partsName.setText(part.getName());
     	partsSrp.setText(String.valueOf(part.getSrp()));
     	partsStock.setText(String.valueOf(part.getStock()));
-//    	partsStoreName.setText(part.getStore());
     }
     
-//    public void AdminsetData (Parts part) throws IOException {
-//    	InputStream InputStream =part.getImage();
-//    	javafx.scene.image.Image image = new javafx.scene.image.Image(InputStream);
-//    	partContainer_image.setImage(image);
-//    	partsLocation.setText(part.getLocation());
-//    	partsName.setText(String.valueOf(part.getId()));
-//    	partsSrp.setText(String.valueOf(part.getSrp()));
-//    	partsStock.setText(String.valueOf(part.getStock()));
-//    }
+    public void AdminsetData (Parts part) throws IOException {
+    	InputStream InputStream =part.getImage();
+    	javafx.scene.image.Image image = new javafx.scene.image.Image(InputStream);
+    	partContainer_image.setImage(image);
+    	partsLocation.setText(part.getLocation());
+    	partsName.setText(String.valueOf(part.getId()));
+    	partsSrp.setText(String.valueOf(part.getSrp()));
+    	partsStock.setText(String.valueOf(part.getStock()));
+    }
 
     
+    public void deletePart() throws ClassNotFoundException, SQLException {
+    	
+        int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete?", "Confirmation",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+             if(result == JOptionPane.YES_OPTION){
+             	connectSQL();
+                PreparedStatement pst;
+                ResultSet rs;
+                
+            	int id = Integer.valueOf(partsName.getText());
+            	
+            	pst = con.prepareStatement("DELETE FROM parts WHERE parts_ID = ?");
+            	
+            	pst.setInt(1, id);
+            	
+            	pst.executeUpdate();
 
+            	
+
+    	
+    }
+    }
 }

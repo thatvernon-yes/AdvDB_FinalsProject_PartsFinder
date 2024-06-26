@@ -80,85 +80,70 @@ public class userLoginController implements Initializable {
     }
     @FXML
     void login(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-    	
+    
         String username = txtUname.getText();
         String password = txtPass.getText();
-        String username2 = null;
-        String password2 = null;
-        String location2 = null;
-        
-//        
+        String location = userLocation_choiceBox.getValue();
 
-        // error when username and pass is valid but no value in choicebox
         if (username.equals("") || password.equals("")) {
             JOptionPane.showMessageDialog(null, "Username or Password Blank");
         } else {
             try {
                 connectSQL();
-                
-//                String location = userLocation_choiceBox.getValue().toString();
-                ResultSet rs2;
-
-                pst = con.prepareStatement("SELECT * FROM customer WHERE customer_username = ? AND customer_password = ?");
-                
-                
-//                String update = ("UPDATE customer SET location = "+"\"" + location + "\" WHERE customer_username = "+"\"" + username + "\"");
-                
-
-                
+                pst = con.prepareStatement("SELECT * FROM customer WHERE customer_username= ? AND customer_password= ?");    
                 pst.setString(1, username);
                 pst.setString(2, password);
+                rs = pst.executeQuery();
+               rs.next();
 
-                rs2 = pst.executeQuery();
+            if(rs.getString("customer_username").equals(username) && 
+            rs.getString("customer_password").equals(password)) {
+            
+            
+            if(location != null) {
+//            System.out.println("second if");
+            JOptionPane.showMessageDialog(null, "Login Successful");
+                            Stage stage = (Stage) btnLogin.getScene().getWindow();
+                            stage.close();
+                            loadMainView(event); 
+            
+            } else {
+            
+            if(!rs.getString("location").equals(null)) {
+ 
+                userLocation_choiceBox.setValue(rs.getString("location"));
+                JOptionPane.showMessageDialog(null, "Login Unsuccessful, no location was set. Location will now be set.");
+//                                Stage stage = (Stage) btnLogin.getScene().getWindow();
+//                                stage.close();
+                              
+            } else {
+            JOptionPane.showMessageDialog(null, "Please select your location");
+                                txtUname.setText("");
+                                txtPass.setText("");
+                                txtUname.requestFocus();
+            }
+            } 
+            
+            } else {
+            
+                JOptionPane.showMessageDialog(null, "Check your credentials");
+                    txtUname.setText("");
+                    txtPass.setText("");
+                    txtUname.requestFocus();
+            
+            }
                 
-                while (rs2.next()) {
-                 username2 = rs2.getString("customer_username");
-                 password2 = rs2.getString("customer_password");
-                 location2 = rs2.getString("location");
-                }
-
-                if(username == username2 && password == password2) {
-
-                    if(userLocation_choiceBox.getValue() != null) {
-                  
-                        JOptionPane.showMessageDialog(null, "Login Successful");
-                        
-                        Stage stage = (Stage) btnLogin.getScene().getWindow();
-                        stage.close();
-                        
-//                        System.out.println(rs);
-                        
-                        loadMainView(event);
-
-                  
-                  }
-                    else {
-                    	if(location2 != null){
-                            userLocation_choiceBox.setValue(location2);
-                    	}
-                    	else {
-                        	JOptionPane.showMessageDialog(null, "Please select location");
-                    	}
-                    }
-                  
-              }
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
             
 
                     
                                         
            
-                    JOptionPane.showMessageDialog(null, "Login Failed");
-                    txtUname.setText("");
-                    txtPass.setText("");
-                    txtUname.requestFocus();
-                }
-
-             catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
-             }
-            }
-    }
-    
+ 
     
 
     private void loadMainView(ActionEvent event) throws IOException, ClassNotFoundException, SQLException{

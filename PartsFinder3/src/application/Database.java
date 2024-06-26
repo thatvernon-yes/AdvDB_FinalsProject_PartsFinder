@@ -80,7 +80,7 @@ public class Database {
     public  ArrayList<Parts> createPartsClassesforDisplay() throws ClassNotFoundException, SQLException{
     	
     	ArrayList<Parts> partsArr = new ArrayList<Parts>();
-    	ResultSet rs = RSquery("SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `address` FROM `parts`");
+    	ResultSet rs = RSquery("SELECT parts.parts_ID, parts.parts_name, parts.address, parts.parts_srp, parts.parts_stock, parts.image, retailers.store_name FROM parts JOIN retailers ON parts.address = retailers.address");
     	
     	 while (rs.next()) {
     		Parts part = new Parts();
@@ -89,6 +89,7 @@ public class Database {
 			part.setLocation(rs.getString("address"));
 			part.setSrp(rs.getInt("parts_srp"));
 			part.setStock(rs.getInt("parts_stock"));
+			part.setStore(rs.getString("retailers.store_name"));
 			partsArr.add(part);
          }
     	
@@ -259,7 +260,7 @@ public class Database {
 		   	
 				break;
     	
-    	case("address"):	
+    	case("Location"):	
     		
     		ArrayList <String> locations = new ArrayList<String>();
     		ArrayList <Integer> distance = new ArrayList<Integer>();
@@ -272,8 +273,8 @@ public class Database {
 	            //System.out.println("Vertex: " + entry.getKey() + ", Distance: " + entry.getValue());
 	        }
     		
-    		rs = RSquery("SELECT * FROM parts ORDER BY FIELD (address, " +  "\"" + locations.get(0) + "\"" + ", " +  "\"" + locations.get(1) + "\"" + ", "+  "\"" + locations.get(2) + "\"" + ")");
-//    		rs = RSquery("SELECT * FROM parts ORDER BY FIELD (location, " +  "\"" + locations.get(0) + "\"" + ", " +  "\"" + locations.get(1) + "\"" + ", "+  "\"" + locations.get(2) + "\"" +", " +  "\"" + locations.get(3) + "\"" + ", " +  "\"" + locations.get(4) + "\"" + ", " +  "\"" + locations.get(5) + "\"" + ", " +  "\"" + locations.get(6) + "\"");
+//    		rs = RSquery("SELECT * FROM parts ORDER BY FIELD (address, " +  "\"" + locations.get(0) + "\"" + ", " +  "\"" + locations.get(1) + "\"" + ", "+  "\"" + locations.get(2) + "\"" + ")");
+    		rs = RSquery("SELECT * FROM parts ORDER BY FIELD (address, " +  "\"" + locations.get(0) + "\"" + ", " +  "\"" + locations.get(1) + "\"" + ", "+  "\"" + locations.get(2) + "\"" +", " +  "\"" + locations.get(3) + "\"" + ", " +  "\"" + locations.get(4) + "\"" + ", " +  "\"" + locations.get(5) + "\"" + ", " +  "\"" + locations.get(6) + "\""+ ")");
     		  
 	   	 	while (rs.next()) {
 		   		Parts part = new Parts();

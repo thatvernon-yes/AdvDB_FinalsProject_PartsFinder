@@ -99,9 +99,9 @@ public class AdminSide_controller implements Initializable {
 			for(Parts part : partsDisplay) {
 				
 				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+				fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 				VBox partsDisplay = fxmlLoader.load();
-				partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+				partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 				partsContainer_controller.AdminsetData(part);
 				
 				if(column == 3) {
@@ -249,9 +249,9 @@ public class AdminSide_controller implements Initializable {
 				for(Parts part : partsDisplay) {
 					
 					FXMLLoader fxmlLoader = new FXMLLoader();
-					fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+					fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 					VBox partsDisplay = fxmlLoader.load();
-					partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+					partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 					partsContainer_controller.setData(part);
 					
 					if(column == 3) {
@@ -285,9 +285,9 @@ public class AdminSide_controller implements Initializable {
 				for(Parts part : partsLocationDisplay) {
 					
 					FXMLLoader fxmlLoader = new FXMLLoader();
-					fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+					fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 					VBox partsDisplay = fxmlLoader.load();
-					partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+					partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 					partsContainer_controller.setData(part);
 					
 					if(column == 3) {
@@ -332,9 +332,9 @@ public class AdminSide_controller implements Initializable {
 			for(Parts part : partsSortDisplay) {
 				
 				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+				fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 				VBox partsDisplay = fxmlLoader.load();
-				partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+				partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 				partsContainer_controller.setData(part);
 				
 				if(column == 3) {
@@ -379,9 +379,9 @@ public class AdminSide_controller implements Initializable {
 					for(Parts part : partsDisplay) {
 						
 						FXMLLoader fxmlLoader = new FXMLLoader();
-						fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+						fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 						VBox partsDisplay = fxmlLoader.load();
-						partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+						partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 						partsContainer_controller.AdminsetData(part);
 						
 						if(column == 3) {
@@ -427,9 +427,9 @@ public class AdminSide_controller implements Initializable {
 					for(Parts part : partsDisplay) {
 						
 						FXMLLoader fxmlLoader = new FXMLLoader();
-						fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+						fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 						VBox partsDisplay = fxmlLoader.load();
-						partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+						partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 						partsContainer_controller.AdminsetData(part);
 						
 						if(column == 3) {
@@ -479,9 +479,9 @@ public class AdminSide_controller implements Initializable {
 						for(Parts part : partsSortDisplay) {
 							
 							FXMLLoader fxmlLoader = new FXMLLoader();
-							fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+							fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 							VBox partsDisplay = fxmlLoader.load();
-							partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+							partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 							partsContainer_controller.setData(part);
 							
 							if(column == 3) {
@@ -519,9 +519,9 @@ public class AdminSide_controller implements Initializable {
 					for(Parts part : partsSortDisplay) {
 						
 						FXMLLoader fxmlLoader = new FXMLLoader();
-						fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+						fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 						VBox partsDisplay = fxmlLoader.load();
-						partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+						partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 						partsContainer_controller.setData(part);
 						
 						if(column == 3) {
@@ -557,9 +557,9 @@ public class AdminSide_controller implements Initializable {
 					for(Parts part : partsSortDisplay) {
 						
 						FXMLLoader fxmlLoader = new FXMLLoader();
-						fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+						fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 						VBox partsDisplay = fxmlLoader.load();
-						partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+						partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 						partsContainer_controller.setData(part);
 						
 						if(column == 3) {
@@ -608,9 +608,9 @@ public class AdminSide_controller implements Initializable {
 				for(Parts part : partsDisplay) {
 					
 					FXMLLoader fxmlLoader = new FXMLLoader();
-					fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+					fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 					VBox partsDisplay = fxmlLoader.load();
-					partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+					partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 					partsContainer_controller.setData(part);
 					
 					if(column == 3) {
@@ -645,35 +645,34 @@ public class AdminSide_controller implements Initializable {
 		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
 		
 		// ADDING CITIES TO THE GRAPH
-        graph.addEdge("City A", "City B", 4);
-        graph.addEdge("City A", "City C", 45);
-        graph.addEdge("City A", "City D", 12);
-        graph.addEdge("City A", "City E", 15);
-        graph.addEdge("City A", "City F", 40);
-        graph.addEdge("City A", "City G", 21);
+        graph.addEdge("City A", "City B", 9);
+        graph.addEdge("City A", "City C", 14);
+        graph.addEdge("City A", "City D", 24);
+        graph.addEdge("City A", "City E", 20);
+        graph.addEdge("City A", "City F", 17);
+        graph.addEdge("City A", "City G", 23);
         
-        graph.addEdge("City B", "City C", 51);
-        graph.addEdge("City B", "City D", 24);
-        graph.addEdge("City B", "City E", 56);
-        graph.addEdge("City B", "City F", 22);
-        graph.addEdge("City B", "City G", 51);
+        graph.addEdge("City B", "City C", 14);
+        graph.addEdge("City B", "City D", 23);
+        graph.addEdge("City B", "City E", 15);
+        graph.addEdge("City B", "City F", 8);
+        graph.addEdge("City B", "City G", 15);
         
      
-        graph.addEdge("City C", "City D", 834);
-        graph.addEdge("City C", "City E", 130);
-        graph.addEdge("City C", "City F", 83);
-        graph.addEdge("City C", "City G", 130);
+        graph.addEdge("City C", "City D", 9);
+        graph.addEdge("City C", "City E", 8);
+        graph.addEdge("City C", "City F", 10);
+        graph.addEdge("City C", "City G", 20);
        
           
-        graph.addEdge("City D", "City E", 32);
-        graph.addEdge("City D", "City F", 124);
-        graph.addEdge("City D", "City G", 23);
+        graph.addEdge("City D", "City E", 8);
+        graph.addEdge("City D", "City F", 13);
+        graph.addEdge("City D", "City G", 20);
         
-        graph.addEdge("City F", "City E", 72);
-        graph.addEdge("City F", "City G", 21);
+        graph.addEdge("City F", "City E", 8);
+        graph.addEdge("City F", "City G", 9);
         
-        graph.addEdge("City E", "City G", 42);
-		
+        graph.addEdge("City E", "City G", 15);
 		
 		ArrayList<Parts> partsSortDisplay = null;
 		String location = location_choiceBox.getValue();
@@ -691,9 +690,9 @@ public class AdminSide_controller implements Initializable {
 				for(Parts part : partsDisplay) {
 					
 					FXMLLoader fxmlLoader = new FXMLLoader();
-					fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+					fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 					VBox partsDisplay = fxmlLoader.load();
-					partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+					partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 					partsContainer_controller.setData(part);
 					
 					if(column == 3) {
@@ -726,9 +725,9 @@ public class AdminSide_controller implements Initializable {
 				for(Parts part : partsSortDisplay) {
 					
 					FXMLLoader fxmlLoader = new FXMLLoader();
-					fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+					fxmlLoader.setLocation(getClass().getResource("parts_containerAdmin.fxml"));
 					VBox partsDisplay = fxmlLoader.load();
-					partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+					partsContainer_controllerAdmin partsContainer_controller = fxmlLoader.getController();
 					partsContainer_controller.setData(part);
 					
 					if(column == 3) {
