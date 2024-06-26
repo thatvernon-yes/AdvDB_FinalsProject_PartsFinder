@@ -142,7 +142,7 @@ public class addPartController implements Initializable{
     	String address = (String) location_choiceBox.getValue();
     	String category = category_txt.getText();
     	
-    	System.out.println(partName + " " + partStock + " " + partDescription + " " + partSrp + " " + address + " " + category + "" + path);
+//    	System.out.println(partName + " " + partStock + " " + partDescription + " " + partSrp + " " + address + " " + category + "" + path);
     	
     	String path = selectedFile.getPath();
     	FileInputStream fis = new FileInputStream(selectedFile);
@@ -160,6 +160,9 @@ public class addPartController implements Initializable{
     	pst.setBinaryStream(7, fis);
     	
     	pst.executeUpdate();
+    	
+    	JOptionPane.showMessageDialog(null, "Part Added Succesfully");
+    	
     	
     	
     	
