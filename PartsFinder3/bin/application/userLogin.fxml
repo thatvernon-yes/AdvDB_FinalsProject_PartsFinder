@@ -62,6 +62,11 @@
                      </image>
                   </ImageView>
                   <ChoiceBox fx:id="userLocation_choiceBox" layoutX="103.0" layoutY="332.0" prefWidth="150.0" />
+                  <Button fx:id="backBtn" layoutX="300.0" layoutY="452.0" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: black;" text="&lt;" textFill="#fff7f7">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                  </Button>
                </children>
             </AnchorPane>
          </right>

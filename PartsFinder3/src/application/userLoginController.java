@@ -49,6 +49,9 @@ public class userLoginController implements Initializable {
     }
 
     @FXML
+    private Button backBtn;
+    
+    @FXML
     private Button btnLogin;
 
     @FXML
@@ -61,57 +64,102 @@ public class userLoginController implements Initializable {
     private ChoiceBox<String> userLocation_choiceBox;
 
     @FXML
+    void back(ActionEvent event) {
+    	try {
+    Parent root = FXMLLoader.load(getClass().getResource("startMenu.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    
+    stage.setScene(new Scene(root));
+    stage.show();
+    
+    
+    } catch(Exception e) {
+    e.printStackTrace();
+    }
+
+    }
+    @FXML
     void login(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
     	
         String username = txtUname.getText();
         String password = txtPass.getText();
+        String username2 = null;
+        String password2 = null;
+        String location2 = null;
+        
 //        
 
-
-        if (username.equals("") && password.equals("")) {
+        // error when username and pass is valid but no value in choicebox
+        if (username.equals("") || password.equals("")) {
             JOptionPane.showMessageDialog(null, "Username or Password Blank");
         } else {
             try {
                 connectSQL();
                 
 //                String location = userLocation_choiceBox.getValue().toString();
+                ResultSet rs2;
 
-                pst = con.prepareStatement("SELECT * FROM customer WHERE customer_username=? AND customer_password=?");
+                pst = con.prepareStatement("SELECT * FROM customer WHERE customer_username = ? AND customer_password = ?");
+                
                 
 //                String update = ("UPDATE customer SET location = "+"\"" + location + "\" WHERE customer_username = "+"\"" + username + "\"");
                 
-                
-                
 
+                
                 pst.setString(1, username);
                 pst.setString(2, password);
 
-                rs = pst.executeQuery();
+                rs2 = pst.executeQuery();
+                
+                while (rs2.next()) {
+                 username2 = rs2.getString("customer_username");
+                 password2 = rs2.getString("customer_password");
+                 location2 = rs2.getString("location");
+                }
 
-                if (rs.next()) {
-                    JOptionPane.showMessageDialog(null, "Login Successful");
-                    
-                    Stage stage = (Stage) btnLogin.getScene().getWindow();
-                    stage.close();
-                    
-//                    System.out.println(rs);
-                    
-                    loadMainView(event);
-                    
+                if(username == username2 && password == password2) {
+
+                    if(userLocation_choiceBox.getValue() != null) {
+                  
+                        JOptionPane.showMessageDialog(null, "Login Successful");
+                        
+                        Stage stage = (Stage) btnLogin.getScene().getWindow();
+                        stage.close();
+                        
+//                        System.out.println(rs);
+                        
+                        loadMainView(event);
+
+                  
+                  }
+                    else {
+                    	if(location2 != null){
+                            userLocation_choiceBox.setValue(location2);
+                    	}
+                    	else {
+                        	JOptionPane.showMessageDialog(null, "Please select location");
+                    	}
+                    }
+                  
+              }
+            
+
                     
                                         
-                } else {
+           
                     JOptionPane.showMessageDialog(null, "Login Failed");
                     txtUname.setText("");
                     txtPass.setText("");
                     txtUname.requestFocus();
                 }
 
-            } catch (ClassNotFoundException | SQLException e) {
+             catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
+             }
             }
-        }
     }
+    
+    
 
     private void loadMainView(ActionEvent event) throws IOException, ClassNotFoundException, SQLException{
     	

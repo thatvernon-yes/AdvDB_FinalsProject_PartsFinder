@@ -96,6 +96,25 @@ public class Database {
     	
     }
     
+    public  ArrayList<Parts> AdmincreatePartsClassesforDisplay() throws ClassNotFoundException, SQLException{
+    	
+    	ArrayList<Parts> partsArr = new ArrayList<Parts>();
+    	ResultSet rs = RSquery("SELECT `image`, `parts_name`, `parts_srp`, `parts_stock`, `address`, `parts_ID` FROM `parts`");
+    	
+    	 while (rs.next()) {
+    		Parts part = new Parts();
+			part.setImage(rs.getBinaryStream("image"));
+			part.setId(rs.getInt("parts_ID"));
+			part.setLocation(rs.getString("address"));
+			part.setSrp(rs.getInt("parts_srp"));
+			part.setStock(rs.getInt("parts_stock"));
+			partsArr.add(part);
+         }
+    	
+		return partsArr;
+    	
+    }
+    
     public  ArrayList<Parts> createPartsClassesforDisplay(String choice) throws ClassNotFoundException, SQLException{
     	
     	ArrayList<Parts> partsArr = new ArrayList<Parts>();

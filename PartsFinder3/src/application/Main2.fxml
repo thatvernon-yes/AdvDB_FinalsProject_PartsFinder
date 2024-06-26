@@ -33,7 +33,7 @@
                <children>
                   <ImageView fx:id="userImage" fitHeight="104.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../ADV%20proj%20images/Sample_User_Icon.png" />
+                        <Image url="@../images/toyota-6647437_1280.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="username_label" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="144.0">

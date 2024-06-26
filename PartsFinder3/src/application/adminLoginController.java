@@ -48,12 +48,31 @@ public class adminLoginController implements Initializable {
 
     @FXML
     private Button btnLogin;
+    
+    @FXML
+    private Button backBtn;
 
     @FXML
     private PasswordField txtPass;
 
     @FXML
     private TextField txtUname;
+    
+    @FXML
+    void back(ActionEvent event) {
+    	try {
+    Parent root = FXMLLoader.load(getClass().getResource("startMenu.fxml"));
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    
+    stage.setScene(new Scene(root));
+    stage.show();
+    
+    
+    } catch(Exception e) {
+    e.printStackTrace();
+    }
+
+    }
 
     @FXML
     void login(ActionEvent event) throws IOException {

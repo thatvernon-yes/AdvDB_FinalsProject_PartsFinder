@@ -11,6 +11,9 @@ public class Parts {
 	//private String retailer;
 	private int stock;
 	private String location;
+	private int id;
+
+
 
 	public Parts( InputStream image, String name, int stock, int srp, String location) {
 		
@@ -22,6 +25,14 @@ public class Parts {
 		this.location = location;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public Parts() {
 		// TODO Auto-generated constructor stub
 	}

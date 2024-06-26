@@ -92,7 +92,7 @@ public class AdminSide_controller implements Initializable {
 //-----FOR DISPLAYING THE ITEMS FROM THE DATABASE -----------------------
 		try {
 		
-			partsDisplay =  DB.createPartsClassesforDisplay();
+			partsDisplay =  DB.AdmincreatePartsClassesforDisplay();
 			int column = 0;
 			int row = 1;
 	
@@ -102,7 +102,7 @@ public class AdminSide_controller implements Initializable {
 				fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
 				VBox partsDisplay = fxmlLoader.load();
 				partsContainer_controller partsContainer_controller = fxmlLoader.getController();
-				partsContainer_controller.setData(part);
+				partsContainer_controller.AdminsetData(part);
 				
 				if(column == 3) {
 					column = 0;
@@ -372,7 +372,7 @@ public class AdminSide_controller implements Initializable {
 		//-----FOR DISPLAYING THE ITEMS FROM THE DATABASE -----------------------
 				try {
 				
-					partsDisplay =  DB.createPartsClassesforDisplay();
+					partsDisplay =  DB.AdmincreatePartsClassesforDisplay();
 					int column = 0;
 					int row = 1;
 			
@@ -382,7 +382,55 @@ public class AdminSide_controller implements Initializable {
 						fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
 						VBox partsDisplay = fxmlLoader.load();
 						partsContainer_controller partsContainer_controller = fxmlLoader.getController();
-						partsContainer_controller.setData(part);
+						partsContainer_controller.AdminsetData(part);
+						
+						if(column == 3) {
+							column = 0;
+							++row;
+						}
+						
+						parts_gridPane.add(partsDisplay, column++, row);
+						GridPane.setMargin(parts_gridPane, new Insets(10));
+						
+					}
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		//-----END OF "FOR DISPLAYING THE ITEMS FROM THE DATABASE"--------------------	
+		
+	}
+	
+	public void restoreDefaultGrid () {
+		
+		parts_gridPane.getChildren().clear(); //removes the current contents of the grid 
+		partsSearch_textField.clear();
+		location_choiceBox.getSelectionModel().clearSelection();
+		upperPriceLimit_choiceBox.getSelectionModel().clearSelection(); 
+		lowerPriceLimit_choiceBox.getSelectionModel().clearSelection();
+		sort_choiceBox.getSelectionModel().clearSelection();
+		
+		
+		//-----FOR DISPLAYING THE ITEMS FROM THE DATABASE -----------------------
+				try {
+				
+					partsDisplay =  DB.AdmincreatePartsClassesforDisplay();
+					int column = 0;
+					int row = 1;
+			
+					for(Parts part : partsDisplay) {
+						
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						fxmlLoader.setLocation(getClass().getResource("parts_container.fxml"));
+						VBox partsDisplay = fxmlLoader.load();
+						partsContainer_controller partsContainer_controller = fxmlLoader.getController();
+						partsContainer_controller.AdminsetData(part);
 						
 						if(column == 3) {
 							column = 0;

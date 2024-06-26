@@ -1,6 +1,9 @@
 package application;
 
 import javafx.scene.image.Image;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,6 +37,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -59,8 +63,9 @@ public class addPartController implements Initializable{
 
         // Credentials
         String url = "jdbc:mysql://localhost:3306/toyotainventorysystem";
-        String username = "root";
-        String password = "";
+	       String username = "root";
+	       String password = "";
+
 
         // Establish the connection
         this.con = DriverManager.getConnection(url, username, password);
@@ -96,31 +101,23 @@ public class addPartController implements Initializable{
     @FXML
     private TextField imagePath;
     
+    private File selectedFile;
+    
+ 
+    
     @FXML
     void browse(ActionEvent event) throws FileNotFoundException, ClassNotFoundException, SQLException {
     	connectSQL();
-    	JFileChooser fileChooser = new JFileChooser();
-    	FileNameExtensionFilter fnwf = new FileNameExtensionFilter("PNG JPG AND JPEG", "png", "jpeg", "jpg");
-    	fileChooser.addChoosableFileFilter(fnwf);
-    	int load = fileChooser.showOpenDialog(null);
+ 		
     	
-    	if (load == fileChooser.APPROVE_OPTION) {
-    		f = fileChooser.getSelectedFile();
-    		
-//    		InputStream stream = new FileInputStream(path);
-//    		Image image = new Image(stream);
-//    		ImageView imageView = new ImageView();
-//    		imageView.setImage(image);
-//    		
+    	FileChooser fc = new FileChooser();
+    	fc.setInitialDirectory(new File("C:\\"));
+    	selectedFile = fc.showOpenDialog(null);
   
-    		imagePath.setText(path);
-    		
-    		
-//    		ImageIcon ii = new ImageIcon(path);
-//    		Image img = ii.getImage();
-//    		imageLabel.setImage(img);
-//    		
-    	}
+		InputStream stream = new FileInputStream(selectedFile);
+		Image image = new Image(stream);
+		imageLabel.setImage(image);
+		imagePath.setText(selectedFile.getPath());
 
 
     }
@@ -147,12 +144,20 @@ public class addPartController implements Initializable{
     	
     	System.out.println(partName + " " + partStock + " " + partDescription + " " + partSrp + " " + address + " " + category + "" + path);
     	
-    	File f = new File(path);
+    	String path = selectedFile.getPath();
+    	FileInputStream fis = new FileInputStream(selectedFile);
     	
-    	InputStream is = new FileInputStream(f);
     	
     	pst = con.prepareStatement("INSERT INTO parts (`parts_ID`, `parts_name`, `parts_stock`, `parts_description`, `parts_srp`, `address`, `category`, `image`) "
-    			+ "VALUES (NULL, " + "\"" + partName + "\"" + ", " + stock + ", "+ "\""+ partDescription + "\"" + ", " + partSrp + ", " + "\"" + address + "\"" + ", " + "\"" + category + "\"" +", " + "\"" + path + "\"" + "" + ")");
+    			+ "VALUES (NULL, ?,?,?,?,?,?,? )");
+    	
+    	pst.setString(1, partName);
+    	pst.setInt(2, partStock);
+    	pst.setString(3, partDescription);
+    	pst.setFloat(4, partSrp);
+    	pst.setString(5, address);
+    	pst.setString(6, category);
+    	pst.setBinaryStream(7, fis);
     	
     	pst.executeUpdate();
     	
@@ -193,4 +198,3 @@ public class addPartController implements Initializable{
 }
 		
 	}
-

@@ -60,6 +60,11 @@
                         <Image url="@../../../../../../Downloads/admin%20icon.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="backBtn" layoutX="309.0" layoutY="457.0" mnemonicParsing="false" onAction="#back" prefHeight="27.0" prefWidth="32.0" style="-fx-background-color: black;" text="&lt;" textFill="#fff7f7">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                  </Button>
                </children>
             </AnchorPane>
          </right>
